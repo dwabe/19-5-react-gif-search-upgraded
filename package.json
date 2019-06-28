@@ -1,5 +1,5 @@
 {
-  "name": "18-8-react-giphy-gif-search",
+  "name": "19-5-react-gif-search-upgraded",
   "version": "1.0.0",
   "description": "gif serch for giphy.com",
   "main": "script.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dwabe/18-8-react-giphy-gif-search.git"
+    "url": "git+https://github.com/dwabe/19-5-react-gif-search-upgraded.git"
   },
   "keywords": [
     "giphy",
@@ -19,9 +19,9 @@
   "author": "bebe",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dwabe/18-8-react-giphy-gif-search/issues"
+    "url": "https://github.com/dwabe/19-5-react-gif-search-upgraded/issues"
   },
-  "homepage": "https://github.com/dwabe/18-8-react-giphy-gif-search#readme",
+  "homepage": "https://github.com/dwabe/19-5-react-gif-search-upgraded#readme",
   "devDependencies": {
     "http-server": "^0.11.1"
   }
