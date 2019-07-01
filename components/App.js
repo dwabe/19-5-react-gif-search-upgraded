@@ -7,38 +7,51 @@ App = React.createClass({
         };
     },
 
-    getGif: function (searchingText, callback) { // 1.
-        var url = 'https://api.giphy.com' + '/v1/gifs/random?api_key=' + 'crpnkkiishqLhV4kb5b773l4K2nQNHdV' + '&tag=' + searchingText; // 2.
-        var xhr = new XMLHttpRequest(); // 3.
-        xhr.open('GET', url);
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText).data; // 4.
-                var gif = { // 5.
-                    url: data.fixed_width_downsampled_url,
-                    sourceUrl: data.url
+    getGif: function (searchingText) {
+        return new Promise(
+            function (resolve, reject) {
+                const request = new XMLHttpRequest();
+                var url = 'https://api.giphy.com' + '/v1/gifs/random?api_key=' + 'Ahz6kKvHoNTrwWXaZYfD2P3uhpLF60NE' + '&tag=' + searchingText;
+                request.open('GET', url);
+                request.onload = function () {
+                    if (request.status === 200) {
+                        var data = JSON.parse(request.responseText).data;
+                        var gif = {
+                            url: data.fixed_width_downsampled_url,
+                            sourceUrl: data.url
+                        };
+                        resolve(gif);
+                    } else {
+                        reject(new Error(this.statusText));
+                    }
                 };
-                callback(gif); // 6.
+                request.onerror = function () {
+                    reject(new Error(
+                        `XMLHttpRequest Error: ${this.statusText}`)
+                    );
+                };
+                request.send();
             }
-        };
-        xhr.send();
+        );
     },
 
-    handleSearch: function (searchingText) { // 1.
+    handleSearch: function (searchingText) {
         this.setState({
-            loading: true // 2.
+            loading: true
         });
-        this.getGif(searchingText, function (gif) { // 3.
-            this.setState({ // 4
-                loading: false, // a
-                gif: gif, // b
-                searchingText: searchingText // c
-            });
-        }.bind(this));
+        this.getGif(searchingText)
+            .then(gif => {
+                this.setState({
+                    loading: false,
+                    gif: gif,
+                    searchingText: searchingText
+                });
+            })
+            .catch(error => console.log('Wystąpił błąd: ', error));    
+       
     },
 
     render: function () {
-
         var styles = {
             margin: '0 auto',
             textAlign: 'center',
